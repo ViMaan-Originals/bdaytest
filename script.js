@@ -94,7 +94,7 @@ elem.msRequestFullscreen(); // IE11
 const music = document.getElementById("bgMusic");
 const audioSource = document.getElementById("audioSource");
 function startMusic(){
-audioSource.src = "Song5.mp3"
+audioSource.src = "https://files.catbox.moe/z4l8j0.mp3"
 music.load();
 music.volume = 0.3;
 music.play();
