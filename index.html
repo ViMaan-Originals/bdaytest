@@ -1,59 +1,105 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <link rel="stylesheet" href="style.css" />
-  <title>Pokemon Magazine</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Basic HTML Template</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Jersey+10&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0&icon_names=arrow_forward_ios" />
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0&icon_names=arrow_back_ios" />
 </head>
-
 <body>
-  <div class="flipbook">
-    <div class="hard">
-      <img src="page1.jpg" alt="huhhh"/></div>
-    <div class="hard">
-    	<img src="page2.jpg" alt="huhhh"/>
-    </div>
-    <div>
-      <small>Lets Look At Some Amazing Pokemon ❤️</small>
-      <small>Gotta Catch 'Em All</small>
-    </div>
-    <div>
-      <img src="page2.jpg" alt="" />
-    </div>
-    <div>
-      <img src="page2.jpg" alt="" />
-    </div>
-    <div>
-      <img src="page2.jpg" alt="" />
-    </div>
-    <div>
-      <img src="page2.jpg" alt="" />
-    </div>
-    <div>
-      <img src="page2.jpg" alt="" />
-    </div>
-    <div class="hard"></div>
-    <div class="hard">Thank You <small>~ HankTheTank</small></div>
-  </div>
 
-  <script src="jquery.js"></script>
-  <script src="turn.js"></script>
-  <script>
-    $(".flipbook").turn({
-    width: $(".flipbook").width(),
-    height: $(".flipbook").height(),
-    autoCenter: true,
-    display: window.innerWidth <= 768 ? 'single' : 'double',
-    elevation: 50,
-    gradients: true,
-    acceleration: true
-  });
+    
+    <div id="orientationContainer" >
+        
+            <h2>Turn Your Screen</h2>
+            <img src="rotate.png" alt="rotate" width="10%">
+    </div>
 
-  // 👉 Add this after the .turn() block
-  
-  </script>
+    
+        <div class="Countdown-Containor" id="Countdown-Containor">
+
+            <div class="wing right"></div>
+            <div class="wing left"></div>
+            <div class="heart">
+                <svg viewBox="0 0 48 48" xmlns="http://www.w3.org/2000/svg" fill="#e83b3b" stroke="#e83b3b" stroke-width="0.00048000000000000007"><g id="SVGRepo_bgCarrier" stroke-width="0"></g><g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g><g id="SVGRepo_iconCarrier"> <title>heart-like-solid</title> <g id="Layer_2" data-name="Layer 2"> <g id="invisible_box" data-name="invisible box"> <rect width="48" height="48" fill="none"></rect> </g> <g id="icons_Q2" data-name="icons Q2"> <path d="M34,4c-3.9,0-8,3.1-10,6.5C22,7.1,17.9,4,14,4A12,12,0,0,0,5.5,7.6,11.9,11.9,0,0,0,2,16.1c0,4.1,2.7,7.6,5,10.2L23.3,43.7a1,1,0,0,0,1.4,0L41,26.3c2.3-2.6,5-6.1,5-10.2A12.1,12.1,0,0,0,34,4Z"></path> </g> </g> </g></svg>
+            </div>
+            
+            <button id="startParty" class="startParty" onclick= " enterFullscreen(), triggerConfetti()">cLick Me</button>
+            <div class="para"><center><p>The World Gets Brighter In..</p></center></div>
+            
+            <div class="countdown">
+                <center><p id="countdown">Loading countdown...</p></center>
+            
+            </div>
+            <div id="envelope">
+            
+            
+            <div class="top"></div>
+              
+              <div class="sides"></div>
+            
+             
+            </div>
+               
+            <div class="datetime">
+                <p id="dateTime"></p>
+            </div>
+        </div>
+        
+        <!--wishpage--->
+        <div class="bWishContainer" id="bWishContainer">
+            <div class="wish-text" id="wishText">
+                 <h1>HAPPY BIRTHDAY</h1>&nbsp;<h1>Saloni</h1> 
+            </div>
+          <p id="smileText">Smile :)</p>
+
+            <div class="flowersContainer">
+            </div>
+          
+          <button id="toLetterButton" class="toLetterButton" onclick="toLetterPage()">
+        <i class="fa-solid fa-chevron-right" style="font-size: 1.5em;"></i>    
+        </button>
+             
+        </div>
+
+        <!---Letter Page-->
+
+        <div class="letterContainer" id="letterContainer" >
+	<div class="Letter fade-in" id="Letter" >
+		 <p style="font-weight: bold; font-size: 20px;" >Dear Saloni,</p>
+		 <p style="font-size: 2em">Wish you a very happy birthday</p>
+		 <p style="width: 60%" id="letterText"></p>
+
+		 <div style="display: flex; flex-direction: row;"><p style="font-weight: bolder;">With a lots of<p style="color: red">&nbsp ❤</p></p></div>
+		 <p style="font-weight: bold; margin-top: -1em">Your Viveku</p>
+
+	</div>
+
+    <button id="toWishPageButton" class="toWishPageButton" onclick="toWishPage()">
+        <i class="fa-solid fa-chevron-left" style="font-size: 1.5em;"></i>  
+    </button>
+
+
+</div>
+
+<!---Menu Page-->
+
+
+    
+        <audio id="bgMusic" autoplay loop>
+            <source id="audioSource" src="" type="audio/mpeg">
+            Your browser does not support the audio element.
+          </audio>
+
+        
+          <script src="script.js"></script>
 </body>
-
 </html>
