@@ -3,6 +3,49 @@ const countdownElement = document.getElementById("Countdown-Containor");
 const wishContainer = document.getElementById("bWishContainer");
 const letterContainer = document.getElementById("letterContainer");
 
+// Preload images and audio files
+// Note: Add your image URLs in the images array and audio URLs in the audios array
+
+    const images = [
+      "https://files.catbox.moe/ao2tyy.jpg",
+      "https://files.catbox.moe/lpl3uc.png",
+      "https://files.catbox.moe/i3k3kl.jpg",
+      "https://files.catbox.moe/sxm6bz.webp",
+      "https://files.catbox.moe/mf6wjf.png"
+    ];
+
+    const audios = [
+      "https://files.catbox.moe/z4l8j0.mp3"
+    ];
+
+    let loadedAssets = 0;
+    const totalAssets = images.length + audios.length;
+
+    function assetLoaded() {
+      loadedAssets++;
+      if (loadedAssets === totalAssets) {
+        document.getElementById("loading-screen").style.display = "none";
+        console.log("All assets loaded successfully!");
+
+      }
+    }
+
+    // Preload images
+    images.forEach((src) => {
+      const img = new Image();
+      img.src = src;
+      img.onload = assetLoaded;
+      img.onerror = assetLoaded;
+    });
+
+    // Preload audio
+    audios.forEach((src) => {
+      const audio = new Audio();
+      audio.src = src;
+      audio.preload = "auto";
+      audio.oncanplaythrough = assetLoaded;
+      audio.onerror = assetLoaded;
+    });
 
 // Function to check the orientation and show/hide the message
 function checkOrientation() {
@@ -94,7 +137,7 @@ elem.msRequestFullscreen(); // IE11
 const music = document.getElementById("bgMusic");
 const audioSource = document.getElementById("audioSource");
 function startMusic(){
-audioSource.src = "https://files.catbox.moe/z4l8j0.mp3"
+audioSource.src = "https://files.catbox.moe/z4l8j0.mp3";
 music.load();
 music.volume = 0.3;
 music.play();
