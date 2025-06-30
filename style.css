@@ -493,13 +493,7 @@ background-size:contain;
 }
 
 
-  @media (max-width: 1000px) {
-  .Letter {
-    font-family: 'Poppins', sans-serif;
-    font-size: 1.7em;
-    width: 90%; /* just a suggestion, looks better on mobile */
-  
-  }
+
   #letterContainer{
 	  width: 100%
 
