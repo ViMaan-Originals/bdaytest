@@ -18,8 +18,11 @@
 </head>
 <body>
     
-    <div id="loading-screen">
-    Loading all magic... 🎁🎵
+    <div id="loading-screen">>
+    Loading your surprise...
+    <div class="progress-container">
+      <div class="progress-bar" id="progress-bar"></div>
+    </div>
   </div>
 
     
@@ -58,21 +61,29 @@
             <div class="datetime">
                 <p id="dateTime"></p>
             </div>
+
+           
         </div>
-        
+         
         <!--wishpage--->
+
         <div class="bWishContainer" id="bWishContainer">
+
             <div class="wish-text" id="wishText">
                  <h1>HAPPY BIRTHDAY</h1>&nbsp;<h1>Saloni</h1> 
+                 <div class="year">18</div>
             </div>
-          <p id="smileText">Smile :)</p>
+          <p id="smileText">Its yo bday bbygirl !! Smile ;))</p>
 
-        
+
+
+
           
-          <button id="toLetterButton" class="toLetterButton" onclick="toLetterPage()">
+          <button id="WishtoLetterButton" class="WishtoLetterButton" onclick="toLetterPage()">
         <i class="fa-solid fa-chevron-right" style="font-size: 1.5em;"></i>    
         </button>
              
+        
         </div>
 
         <!---Letter Page-->
@@ -88,15 +99,53 @@
 
 	</div>
 
-    <button id="toWishPageButton" class="toWishPageButton" onclick="toWishPage()">
+    <button id="LettertoWishButton" class="LettertoWishButton" onclick="toWishPage()">
         <i class="fa-solid fa-chevron-left" style="font-size: 1.5em;"></i>  
+    </button>
+
+    <button id="LettertoCardButton" class="LettertoCardButton" onclick="toCardPage() ">
+        <i class="fa-solid fa-chevron-right" style="font-size: 1.5em;"></i>  
     </button>
 
 
 </div>
 
-<!---Menu Page-->
+<!---Card Page-->
+<div class="cardContainer" id="cardContainer">
+<div class="flipbook" id="flipbook">
+    <div class="hard">
+      <img src="book-effect/images/page1.jpg" alt="huhhh"/></div>
+    <div class="hard">
+    	<img src="book-effect/images/page2.jpg" alt="huhhh"/>
+    </div>
+    <div>
+      <img src="book-effect/images/page2.jpg" alt="" />
+    </div>
+    <div>
+      <img src="book-effect/images/page2.jpg" alt="" />
+    </div>
+    <div>
+      <img src="book-effect/images/page2.jpg" alt="" />
+    </div>
+    <div>
+      <img src="book-effect/images/page2.jpg" alt="" />
+    </div>
+    <div>
+      <img src="book-effect/images/page2.jpg" alt="" />
+    </div>
+    <div>
+      <img src="book-effect/images/page2.jpg" alt="" />
+    </div>
+    <div class="hard"></div>
+    <div class="hard">Thank You <small>~ HankTheTank</small></div>
+  </div>
 
+   <button id="CardtoLetterButton" class="CardtoLetterButton" onclick="toLetterPage() ">
+        <i class="fa-solid fa-chevron-left" style="font-size: 1.5em;"></i>  
+    </button>
+
+    
+</div>
 
     
         <audio id="bgMusic" autoplay loop>
@@ -104,7 +153,21 @@
             Your browser does not support the audio element.
           </audio>
 
-        
+        <script src="book-effect/jquery.js"></script>
+        <script src="book-effect/turn.js"></script>
           <script src="script.js"></script>
+          <script type="text/javascript">
+          	//Card Flip Functionality
+$(".flipbook").turn({
+    width: $(".flipbook").width(),
+    height: $(".flipbook").height(),
+    autoCenter: true,
+    display: window.innerWidth <= 768 ? 'single' : 'double',
+    elevation: 50,
+    gradients: true,
+    acceleration: true
+  });
+
+          </script>
 </body>
 </html>
