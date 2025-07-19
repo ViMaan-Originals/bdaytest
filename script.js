@@ -2,6 +2,8 @@ const orientationContainer = document.getElementById("orientationContainer");
 const countdownElement = document.getElementById("Countdown-Containor");
 const wishContainer = document.getElementById("bWishContainer");
 const letterContainer = document.getElementById("letterContainer");
+const cardContainer = document.getElementById("cardContainer");
+const CardtoLetterButton = document.getElementById("CardtoLetterButton");
 
 // Preload images and audio files
 // Note: Add your image URLs in the images array and audio URLs in the audios array
@@ -15,13 +17,20 @@ const letterContainer = document.getElementById("letterContainer");
     ];
 
     const audios = [
-      "https://files.catbox.moe/z4l8j0.mp3"
+      "https://files.catbox.moe/z4l8j0.mp3",
+      "https://files.catbox.moe/edv654.mp3"
     ];
 
     let loadedAssets = 0;
     const totalAssets = images.length + audios.length;
 
+     function updateProgress() {
+      const progress = ((loadedAssets / totalAssets) * 100).toFixed(0);
+      document.getElementById("progress-bar").style.width = `${progress}%`;
+    }
+
     function assetLoaded() {
+      updateProgress();
       loadedAssets++;
       if (loadedAssets === totalAssets) {
         document.getElementById("loading-screen").style.display = "none";
@@ -46,6 +55,10 @@ const letterContainer = document.getElementById("letterContainer");
       audio.oncanplaythrough = assetLoaded;
       audio.onerror = assetLoaded;
     });
+
+
+
+
 
 // Function to check the orientation and show/hide the message
 function checkOrientation() {
@@ -117,7 +130,7 @@ countdownElement.style.display = "none";
 wishContainer.style.display = "flex";
 
 
-startMusic();
+startMusic("https://files.catbox.moe/z4l8j0.mp3");
 
 }
 
@@ -136,11 +149,13 @@ elem.msRequestFullscreen(); // IE11
 // Function to start music
 const music = document.getElementById("bgMusic");
 const audioSource = document.getElementById("audioSource");
-function startMusic(){
-audioSource.src = "https://files.catbox.moe/z4l8j0.mp3";
+function startMusic(Source){
+audioSource.src = Source;
 music.load();
 music.volume = 0.3;
 music.play();
+console.log("Music started");
+console.log("Music source set to: " + audioSource.src);
 }
 
 // funtion to go to letter page
@@ -148,6 +163,8 @@ music.play();
 function toLetterPage() {
     wishContainer.style.display = "none";
     letterContainer.style.display = "flex";
+    CardtoLetterButton.style.display = "none";
+    cardContainer.style.height = "0";
     typeWriter()
     
 }
@@ -157,6 +174,14 @@ function toWishPage() {
     letterContainer.style.display = "none";
     wishContainer.style.display = "flex";
     
+}
+// Function to go back to the card page
+function toCardPage() {
+    letterContainer.style.display = "none";
+    cardContainer.style.height = "100vh";
+    CardtoLetterButton.style.display = "block";
+    startMusic("https://files.catbox.moe/edv654.mp3")
+
 }
 
 // letter animation
@@ -189,3 +214,4 @@ function typeWriter() {
     setTimeout(typeWriter, speed);
   }
 }
+
