@@ -129,7 +129,7 @@ colors: ['#ff80ab', '#f06292', '#fce4ec', '#ff4081']
 countdownElement.style.display = "none";
 wishContainer.style.display = "flex";
 
-
+countdownMusic.pause();
 startMusic("https://files.catbox.moe/z4l8j0.mp3");
 
 }
@@ -215,3 +215,247 @@ function typeWriter() {
   }
 }
 
+// audio play function
+
+let originalRect = null;
+    let clonedSection = null;
+
+    function expandSection(button) {
+      const section = button.parentElement;
+      originalRect = section.getBoundingClientRect();
+      document.querySelectorAll('.section').forEach(s => s.style.visibility = 'hidden');
+
+      clonedSection = section.cloneNode(true);
+      clonedSection.classList.add('fullscreen-section');
+      clonedSection.style.top = originalRect.top + 'px';
+      clonedSection.style.left = originalRect.left + 'px';
+      clonedSection.style.width = originalRect.width + 'px';
+      clonedSection.style.height = originalRect.height + 'px';
+
+      const oldButton = clonedSection.querySelector('button');
+      if (oldButton) oldButton.remove();
+
+      const backBtn = document.createElement('button');
+      backBtn.className = 'back-btn';
+      backBtn.innerText = 'Back';
+      backBtn.onclick = collapseSection;
+      clonedSection.appendChild(backBtn);
+
+      document.body.appendChild(clonedSection);
+
+      gsap.to(clonedSection, {
+        top: 0,
+        left: 0,
+        width: '100vw',
+        height: '100vh',
+        visibility: 'visible',
+        duration: 0.6,
+        ease: 'power3.inOut'
+      });
+    }
+
+    function collapseSection() {
+      if (!clonedSection || !originalRect) return;
+
+      gsap.to(clonedSection, {
+        top: originalRect.top + 'px',
+        left: originalRect.left + 'px',
+        width: originalRect.width + 'px',
+        height: originalRect.height + 'px',
+        duration: 0.5,
+        ease: 'power3.inOut',
+        onComplete: () => {
+          clonedSection.remove();
+          clonedSection = null;
+          document.querySelectorAll('.section').forEach(s => s.style.visibility = 'visible');
+        }
+      });
+    }
+
+    document.querySelectorAll('.section').forEach(section => {
+      const video = section.querySelector('video');
+      section.addEventListener('mouseenter', () => { if (video) video.play(); });
+      section.addEventListener('mouseleave', () => { if (video) video.pause(); });
+    });
+
+    // Drag logic
+    const card = document.getElementById('popupCard');
+    
+    let offsetX = 0, offsetY = 0, isDragging = false;
+
+    const startDrag = (e) => {
+      isDragging = true;
+      const clientX = e.touches ? e.touches[0].clientX : e.clientX;
+      const clientY = e.touches ? e.touches[0].clientY : e.clientY;
+      offsetX = clientX - card.offsetLeft;
+      offsetY = clientY - card.offsetTop;
+      card.style.cursor = 'grabbing';
+    };
+
+    const stopDrag = () => {
+      isDragging = false;
+      card.style.cursor = 'grab';
+    };
+
+    const onDrag = (e) => {
+      if (!isDragging) return;
+      const clientX = e.touches ? e.touches[0].clientX : e.clientX;
+      const clientY = e.touches ? e.touches[0].clientY : e.clientY;
+      card.style.left = `${clientX - offsetX}px`;
+      card.style.top = `${clientY - offsetY}px`;
+    };
+
+    card.addEventListener('mousedown', startDrag);
+    document.addEventListener('mouseup', stopDrag);
+    document.addEventListener('mousemove', onDrag);
+
+    card.addEventListener('touchstart', startDrag, { passive: false });
+    document.addEventListener('touchend', stopDrag);
+    document.addEventListener('touchmove', onDrag, { passive: false });
+
+    // Minimize + Restore
+    const restoreTab = document.getElementById('restoreTab');
+    function minimizeCard() {
+      card.style.left = '-200px';
+      restoreTab.style.display = 'flex';
+    }
+
+    function restoreCard() {
+      card.style.left = '20px';
+      restoreTab.style.display = 'none';
+    }
+
+
+    function minimizeCard() {
+  gsap.to(card, {
+    opacity: 0,
+    duration: 0.4,
+    ease: 'power2.inOut',
+    onComplete: () => {
+      card.style.display = 'none';
+      document.getElementById('showCardBtn').style.display = 'flex';
+    }
+  });
+}
+
+function showCard() {
+  card.style.display = 'block';
+  gsap.fromTo(card,
+    { opacity: 0 },
+    {
+      opacity: 1,
+      duration: 0.4,
+      ease: 'power2.inOut'
+    }
+  );
+  document.getElementById('showCardBtn').style.display = 'none';
+}
+
+ const countdownMusic = document.getElementById('countdownAudio');
+    const playPauseBtn = document.getElementById('playPause');
+    const progress = document.getElementById('progress');
+    const current = document.getElementById('current');
+    const duration = document.getElementById('duration');
+    const songTitle = document.getElementById('songTitle');
+    const playlistBox = document.getElementById('playlistBox');
+    const playlistUl = document.getElementById('playlist');
+    const playIcon = document.getElementById("playBtn");
+    const pauseIcon = document.getElementById("pauseBtn");
+
+    const songs = [
+      { title: "Sunflower", src: "https://files.catbox.moe/ebjqtx.mp3" },
+      { title: "Take on me", src: "https://files.catbox.moe/v7kmvu.mp3" },
+      { title: "Tilted", src: "https://files.catbox.moe/6859cg.mp3"},
+      { title: "Borderline", src: "https://files.catbox.moe/n53g9o.mp3" },
+      { title: "Forever Young", src: "https://files.catbox.moe/jffftr.mp3" },
+      { title: "Save Room", src: "https://files.catbox.moe/kmua8b.mp3" }
+      
+    ];
+
+
+
+    let currentSongIndex = 0;
+
+    function loadSong(index) {
+      const song = songs[index];
+      countdownMusic.src = song.src;
+      songTitle.innerText = song.title;
+      countdownMusic.load();
+      pauseIcon.style.display = 'none';
+    }
+
+    function playPause() {
+      if (countdownMusic.paused) {
+        countdownMusic.play();
+        playIcon.style.display = 'none';
+        pauseIcon.style.display = 'block';
+      } else {
+        countdownMusic.pause();
+        playIcon.style.display = 'block';
+        pauseIcon.style.display = 'none';
+      }
+    }
+
+    function restart() {
+      countdownMusic.currentTime = 0;
+    }
+
+    function nextSong() {
+      currentSongIndex = (currentSongIndex + 1) % songs.length;
+      loadSong(currentSongIndex);
+      countdownMusic.play();
+      playIcon.style.display = 'none';
+      pauseIcon.style.display = 'block';
+    }
+
+    function prevSong() {
+      currentSongIndex = (currentSongIndex - 1 + songs.length) % songs.length;
+      loadSong(currentSongIndex);
+      countdownMusic.play();
+      playIcon.style.display = 'none';
+      pauseIcon.style.display = 'block';
+    }
+
+    function togglePlaylist() {
+      playlistBox.classList.toggle('active');
+    }
+
+    function formatTime(sec) {
+      let m = Math.floor(sec / 60);
+      let s = Math.floor(sec % 60);
+      return `${m}:${s < 10 ? '0' + s : s}`;
+    }
+
+    playPauseBtn.onclick = playPause;
+
+    countdownMusic.onloadedmetadata = () => {
+      progress.max = Math.floor(countdownMusic.duration);
+      duration.innerText = formatTime(countdownMusic.duration);
+    };
+
+    countdownMusic.ontimeupdate = () => {
+      progress.value = Math.floor(countdownMusic.currentTime);
+      current.innerText = formatTime(countdownMusic.currentTime);
+    };
+
+    progress.oninput = () => {
+      countdownMusic.currentTime = progress.value;
+    };
+
+    // Load initial song
+    loadSong(currentSongIndex);
+
+    // Load playlist
+    songs.forEach((song, index) => {
+      const li = document.createElement('li');
+      li.innerText = song.title;
+      li.onclick = () => {
+        currentSongIndex = index;
+        loadSong(currentSongIndex);
+        countdownMusic.play();
+        playIcon.style.display = 'none';
+        pauseIcon.style.display = 'block';
+        playlistBox.classList.remove('active');
+      };
+      playlistUl.appendChild(li);
+    });
