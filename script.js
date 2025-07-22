@@ -353,7 +353,7 @@ function showCard() {
 
  const countdownMusic = document.getElementById('countdownAudio');
     const playPauseBtn = document.getElementById('playPause');
-    const progress = document.getElementById('progress');
+    const slider = document.getElementById('slider');
     const current = document.getElementById('current');
     const duration = document.getElementById('duration');
     const songTitle = document.getElementById('songTitle');
@@ -429,17 +429,17 @@ function showCard() {
     playPauseBtn.onclick = playPause;
 
     countdownMusic.onloadedmetadata = () => {
-      progress.max = Math.floor(countdownMusic.duration);
+      slider.max = Math.floor(countdownMusic.duration);
       duration.innerText = formatTime(countdownMusic.duration);
     };
 
     countdownMusic.ontimeupdate = () => {
-      progress.value = Math.floor(countdownMusic.currentTime);
+      slider.value = Math.floor(countdownMusic.currentTime);
       current.innerText = formatTime(countdownMusic.currentTime);
     };
 
-    progress.oninput = () => {
-      countdownMusic.currentTime = progress.value;
+    slider.oninput = () => {
+      countdownMusic.currentTime = slider.value;
     };
 
     // Load initial song
