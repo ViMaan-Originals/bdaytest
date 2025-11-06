@@ -471,7 +471,7 @@ border-radius: 30px;
 /* letter page styling*/
 #letterContainer{
 	display: none;
-    
+    font-family: "Delius", cursive;
     background-image: url("https://files.catbox.moe/mf6wjf.png");
 	align-items: center;
     background-size: cover;
@@ -525,7 +525,7 @@ background-size:contain;
 
   */
   #letterContainer{
-	  width: 100%
+	  width: 100%;
 
 }
 
@@ -557,7 +557,8 @@ background-size:contain;
 
 .LettertoCardButton{
     position: absolute;
-    bottom: 30px; animation: smileAnime 10s;
+    bottom: 30px; 
+    animation: smileAnime 10s;
     right: 6%;
     color: rgb(47, 47, 47);
     transform: translateX(50%);
@@ -568,9 +569,11 @@ background-size:contain;
     width: 50px;
 }
 
+
 .CardtoLetterButton{
     position: absolute;
-    bottom: 30px; animation: smileAnime 10s;
+    bottom: 30px; 
+    animation: smileAnime 10s;
     left: 6%;
     color: rgb(47, 47, 47);
     transform: translateX(-50%);
@@ -584,7 +587,8 @@ background-size:contain;
 
 .WishtoLetterButton{
     position: absolute;
-    bottom: 30px; animation: smileAnime 10s;
+    bottom: 30px; 
+    animation: smileAnime 10s;
     left: 94%;
     color: aliceblue;
     transform: translateX(-50%);
@@ -595,6 +599,49 @@ background-size:contain;
     width: 50px;
 }
 
+
+.CardtoVideoMsgButton{
+  display: none;
+   position: absolute;
+    bottom: 30px; 
+    animation: smileAnime 10s;
+    right: 6%;
+    color: rgb(47, 47, 47);
+    transform: translateX(50%);
+    background-color: transparent;
+    border: none;
+    cursor: pointer;
+    font-size: 1.2em;
+    width: 50px;
+}
+
+.VideoMsgtoClosureButton{
+   position: absolute;
+    bottom: 30px; 
+    animation: smileAnime 10s;
+    right: 6%;
+    color: rgb(47, 47, 47);
+    transform: translateX(50%);
+    background-color: transparent;
+    border: none;
+    cursor: pointer;
+    font-size: 1.2em;
+    width: 50px;
+}
+
+.VideoMsgtoCardButton{
+   position: absolute;
+    bottom: 30px; 
+    animation: smileAnime 10s;
+    left: 6%;
+    color: rgb(47, 47, 47);
+    transform: translateX(-50%);
+    background-color: transparent;
+    border: none;
+    cursor: pointer;
+    font-size: 1.2em;
+    width: 50px;
+}
 
 
 /*Card Page Styling*/
@@ -664,7 +711,7 @@ background-size:contain;
 
 
 /* audio player */
- .draggable-card {
+ .draggableMusicCard {
       position: fixed;
       top: 20px;
       left: 20px;
@@ -674,7 +721,7 @@ background-size:contain;
       z-index: 99999999;
       cursor: grab;
       user-select: none;
-      transition: left 0.4s ease, top 0.4s ease;
+      transition: left 0.2s ease, top 0.2s ease;
 
       backdrop-filter: blur(16px) saturate(180%);
     -webkit-backdrop-filter: blur(16px) saturate(180%);
@@ -683,7 +730,7 @@ background-size:contain;
 
          }
 
-    .drag-header {
+    .dragMusicHeader {
       padding: 5px;
       background: rgba(37, 37, 37, 0.297);
       color: #000;
@@ -701,12 +748,23 @@ background-size:contain;
       padding: 15px;
     }
 
-    .minimize-btn {
+    .Musicminimize-btn {
       background: none;
       border: none;
       color: #ffffffa2;
       font-size: 18px;
       cursor: pointer;
+    }
+    .Msgminimize-btn {
+      position: absolute;
+      background: none;
+      border: none;
+      color: #ffffffa2;
+      font-size: 18px;
+      cursor: pointer;
+      height: 40px;
+      width: 40px;
+      
     }
 
 .restore-tab {
@@ -722,14 +780,150 @@ background-size:contain;
       z-index: 10000;
       border-top-left-radius: 10px;
       border-top-right-radius: 10px;
-
       backdrop-filter: blur(16px) saturate(180%);
     -webkit-backdrop-filter: blur(16px) saturate(180%);
     background-color: rgba(53, 53, 53, 0.119);
 
     }
 
-   
+/* Draggable msg card */
+ .draggableMessageCard {
+      position: fixed;
+      top: 20px;
+      left: 20px;
+      width: 630px;
+      /*background: #fff;*/
+      display: none;
+      flex-direction:row;
+      z-index: 99999999;
+      cursor: grab;
+      user-select: none;
+      transition: left 0.2s ease, top 0.2s ease;
+
+      backdrop-filter: blur(16px) saturate(180%);
+    -webkit-backdrop-filter: blur(16px) saturate(180%);
+    background-color: rgba(73, 74, 76, 0.27);
+    border-radius: 12px;
+
+}
+
+.message-tab {
+      position: fixed;
+      bottom: 0;
+      width: 50px;
+      height: 70px;
+      left: 90px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      z-index: 10000;
+      border-top-left-radius: 10px;
+      border-top-right-radius: 10px;
+      backdrop-filter: blur(16px) saturate(180%);
+    -webkit-backdrop-filter: blur(16px) saturate(180%);
+    background-color: rgba(53, 53, 53, 0.119);
+
+    }
+
+    .leftSection {
+      width: 50%;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding: 5px;
+    }
+    .rightSection {
+      background: rgba(37, 37, 37, 0.784) url(pattern.png);
+      background-repeat: repeat;
+      background-size: contain;
+      width: 50%;
+      border-radius: 12px;
+      display: flex;
+      padding: 15px;
+      margin:10px;
+      align-items: center;
+      justify-content: center;
+  
+    }
+    .rightSection .messages{
+      font-family: "Delius Swash Caps", cursive;
+      font-size: 15px;
+      padding: 10px;
+      text-align: center;
+      gap: 10px;
+      width: 100%;
+      height: 100%;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      transition: opacity 0.4s ease;
+    }
+
+
+    .circle {
+    position: relative;
+    width: 200px;
+    height: 200px;
+  }
+
+  .circle svg {
+    transform: rotate(-90deg);
+    width: 100%;
+    height: 100%;
+    overflow: visible;
+  }
+
+  .circle circle {
+    
+    fill: none;
+    stroke-width: 12;
+    stroke-linecap:butt;
+  ;
+  }
+
+  .circle .bg {
+    stroke: #333;
+  }
+
+  .circle .progress {
+    stroke: #0fc2dde9;
+    stroke-dasharray: 377;
+    stroke-dashoffset: 377;
+    transition: stroke-dashoffset 1.5s ease-out;
+  }
+
+  .circle .text {
+    position: absolute;
+    top: 45%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    font-size: 1.6rem;
+    font-weight: 300;
+  }
+  
+   .circle .subtext {
+    text-align: center;
+    position: absolute;
+    top: 60%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    color:#cbcbcb
+  }
+
+  
+  .stats p{
+     margin: 0px 20px;
+    justify-content: center;
+    color: #dddcdc;
+    font-size: 16px;
+    }
+
+  .stats p span{
+    color: #fdfbfb;
+    font-size: 20px;
+  }
 
     .player {
       width: 320px;
@@ -883,3 +1077,41 @@ background-size:contain;
       background: #444;
 
     }
+
+.videoMsgContainer{
+  display: none;
+    font-family: "Delius", cursive;
+    height: 100vh;
+  position: relative;
+  align-items: center;
+  display: none;
+  justify-content: center;   /* horizontal */
+  align-content: center;      /* vertical */;
+  
+  animation: fadeIn 1s ease-in forwards;
+
+}
+.videoMsgContainer video{
+  width: 50%;
+  height: auto;
+  border-radius: 20px;
+  box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37);
+}
+
+.closureContainer{
+  display: none;
+    font-family: "Delius", cursive;
+    background-image: url("https://files.catbox.moe/mf6wjf.png");
+  align-items: center;
+    background-size: cover;
+    background-repeat: repeat-x;
+  height: 100vh;
+  position: relative;
+  align-items: center;
+  display: none;
+  justify-content: center;   /* horizontal */
+  align-content: center;      /* vertical */;
+  
+  animation: fadeIn 1s ease-in forwards;
+
+}
