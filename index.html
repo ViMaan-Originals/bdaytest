@@ -16,11 +16,12 @@
     <link href="https://fonts.googleapis.com/css2?family=Delius+Swash+Caps&family=Sour+Gummy:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Work+Sans:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Delius&display=swap" rel="stylesheet">
 
 </head>
 <body>
     
-    <div id="loading-screen">>
+    <div id="loading-screen">
     Loading your surprise...
     <div class="progress-container">
       <div class="progress-bar" id="progress-bar"></div>
@@ -65,10 +66,10 @@
             </div>
 
 
-            <div class="draggable-card" id="popupCard">
-    <div class="drag-header">
-&nbsp;
-      <button class="minimize-btn" onclick="minimizeCard()" >−</button>
+            <div class="draggableMusicCard" id="popupMusicCard">
+    <div class="dragMusicHeader">
+      &nbsp;
+      <button class="Musicminimize-btn" onclick="minimizeMusicCard()" >−</button>
     </div>
     <div class="card-content">
       <div class="player">
@@ -114,12 +115,58 @@
     <div class="card-controls">
 </div>
   </div>
-           <div class="restore-tab" id="showCardBtn" onclick="showCard()"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-music2-icon lucide-music-2"><circle cx="8" cy="18" r="4"/><path d="M12 18V2l7 4"/></svg></div></div>
-        </div>
-         
-        <!--wishpage--->
+           <div class="restore-tab" id="showMusicCardBtn" onclick="showMusicCard()"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-music2-icon lucide-music-2"><circle cx="8" cy="18" r="4"/><path d="M12 18V2l7 4"/></svg></div>
+          
+          
+ <!--Message Tab-->
 
-        <div class="bWishContainer" id="bWishContainer">
+  <div class="draggableMessageCard" id="popupMessageCard">
+
+    <button class="Msgminimize-btn" onclick="minimizeMsgCard()" >&#9746;</button>
+    
+    <div class="leftSection">
+      
+      <div class="circle">
+    <svg>
+      <circle class="bg" cx="100" cy="100" r="60" ></circle>
+      <circle class="progress" cx="100" cy="100" r="60"></circle>
+    </svg>
+    <div class="text"></div>
+    <div class= "subtext">of 18th year completed</div>
+   
+    </div>
+
+    <div class="stats">
+      <p>&#9737; <span id="beats">0</span> heartbeats since birth💓</p>
+      <p>&#9737; <span id="sunrises">0</span> sunrises seen 🌞</p>
+      <p>&#9737; <span id="bloodLiters">0</span> of blood pumped 🩸</span></p>
+    </div>
+</div>
+    <div class="rightSection">
+      <div class="messages" id="messages">
+        <!-- Messages will be dynamically added here -->
+         
+    </div>
+  
+    
+    </div>
+
+
+
+
+    </div>
+
+        <div class="message-tab" id="showMsgBtn" onclick="showMsgCard()"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" color="white" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-message-square-text-icon lucide-message-square-text"><path d="M22 17a2 2 0 0 1-2 2H6.828a2 2 0 0 0-1.414.586l-2.202 2.202A.71.71 0 0 1 2 21.286V5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2z"/><path d="M7 11h10"/><path d="M7 15h6"/><path d="M7 7h8"/></svg><path d="M12 18V2l7 4"/></svg>
+        </div>
+      
+      
+      </div>
+                
+          
+          
+<!--wishpage--->
+
+  <div class="bWishContainer" id="bWishContainer">
 
             <div class="wish-text" id="wishText">
                  <h1>HAPPY BIRTHDAY</h1>&nbsp;<h1>Saloni</h1> 
@@ -159,6 +206,7 @@
         <i class="fa-solid fa-chevron-right" style="font-size: 1.5em;"></i>  
     </button>
 
+ 
 
 </div>
 
@@ -166,27 +214,27 @@
 <div class="cardContainer" id="cardContainer">
 <div class="flipbook" id="flipbook">
     <div class="hard">
-      <img src="page1.jpg" alt="huhhh"/></div>
+      <img src="book-effect/images/page1.jpg" alt="huhhh"/></div>
     <div class="hard">
-    	<img src="page2.jpg" alt="huhhh"/>
+    	<img src="book-effect/images/page2.jpg" alt="huhhh"/>
     </div>
     <div>
-      <img src="page2.jpg" alt="" />
+      <img src="book-effect/images/page2.jpg" alt="" />
     </div>
     <div>
-      <img src="page2.jpg" alt="" />
+      <img src="book-effect/images/page2.jpg" alt="" />
     </div>
     <div>
-      <img src="page2.jpg" alt="" />
+      <img src="book-effect/images/page2.jpg" alt="" />
     </div>
     <div>
-      <img src="page2.jpg" alt="" />
+      <img src="book-effect/images/page2.jpg" alt="" />
     </div>
     <div>
-      <img src="page2.jpg" alt="" />
+      <img src="book-effect/images/page2.jpg" alt="" />
     </div>
     <div>
-      <img src="page2.jpg" alt="" />
+      <img src="book-effect/images/page2.jpg" alt="" />
     </div>
     <div class="hard"></div>
     <div class="hard">Thank You <small>~ HankTheTank</small></div>
@@ -196,8 +244,37 @@
         <i class="fa-solid fa-chevron-left" style="font-size: 1.5em;"></i>  
     </button>
 
+    <button id="CardtoVideoMsgButton" class="CardtoVideoMsgButton" onclick="toVideoMsgPage() ">
+        <i class="fa-solid fa-chevron-right" style="font-size: 1.5em;"></i>  
+    </button> 
+
+
     
 </div>
+
+<!---video msg page-->
+<div class="videoMsgContainer" id="videoMsgContainer">
+    <video id="videoMessage" width="100%" height="100%" controls>
+        <source src="large.mp4" type="video/mp4">
+        Your browser does not support the video tag.
+      </video>
+
+      <button id="VideoMsgtoCardButton" class="VideoMsgtoCardButton" onclick="toLetterPage() ">
+        <i class="fa-solid fa-chevron-left" style="font-size: 1.5em;"></i>  
+    </button>
+
+    <button id="VideoMsgtoClosureButton" class="VideoMsgtoClosureButton" onclick="toVideoMsgPage() ">
+        <i class="fa-solid fa-chevron-right" style="font-size: 1.5em;"></i>  
+    </button> 
+</div>
+
+<!--Closure Page-->
+<div class="closureContainer" id="closureContainer">
+    <h1>Thank You For Being A Part Of My Life</h1>
+    <p>Wishing You All The Happiness In The World !!</p>
+
+</div>
+
 
     
         <audio id="bgMusic" autoplay loop>
