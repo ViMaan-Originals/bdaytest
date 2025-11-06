@@ -4,6 +4,9 @@ const wishContainer = document.getElementById("bWishContainer");
 const letterContainer = document.getElementById("letterContainer");
 const cardContainer = document.getElementById("cardContainer");
 const CardtoLetterButton = document.getElementById("CardtoLetterButton");
+const CardtoVideoMsgButton = document.getElementById("CardtoVideoMsgButton");
+const videoMsgContainer = document.getElementById("videoMsgContainer");
+const video = document.getElementById('videoMessage');
 
 // Preload images and audio files
 // Note: Add your image URLs in the images array and audio URLs in the audios array
@@ -135,6 +138,8 @@ startMusic("https://files.catbox.moe/z4l8j0.mp3");
 }
 
 
+
+
 // Function to enter fullscreen mode
 function enterFullscreen() {
 const elem = document.documentElement;
@@ -165,11 +170,12 @@ function toLetterPage() {
     letterContainer.style.display = "flex";
     CardtoLetterButton.style.display = "none";
     cardContainer.style.height = "0";
+    CardtoVideoMsgButton.style.display = "none";
     typeWriter()
     
 }
 
-// Function to go back to the countdown page
+// Function to go back to the bday wishpage
 function toWishPage() {
     letterContainer.style.display = "none";
     wishContainer.style.display = "flex";
@@ -180,8 +186,18 @@ function toCardPage() {
     letterContainer.style.display = "none";
     cardContainer.style.height = "100vh";
     CardtoLetterButton.style.display = "block";
-    startMusic("https://files.catbox.moe/edv654.mp3")
+    CardtoVideoMsgButton.style.display = "block";
 
+}
+
+function toVideoMsgPage() {
+    CardtoVideoMsgButton.style.display = "none";
+    videoMsgContainer.style.display = "flex";
+    cardContainer.style.height = "0";
+    CardtoLetterButton.style.display = "none";
+    CardtoLetterButton.style.display = "none";
+    video.play();
+    // Add any additional logic to show the video message page
 }
 
 // letter animation
@@ -279,68 +295,112 @@ let originalRect = null;
     });
 
     // Drag logic
-    const card = document.getElementById('popupCard');
+    const MusicCard = document.getElementById('popupMusicCard');
+    const MessageCard = document.getElementById('popupMessageCard');
+  
     
-    let offsetX = 0, offsetY = 0, isDragging = false;
+    let offsetXMusic = 0, offsetYMusic = 0, isDraggingMusic = false;
+    let offsetXMessage = 0, offsetYMessage = 0, isDraggingMessage = false;
 
-    const startDrag = (e) => {
-      isDragging = true;
+    const startDragMessage = (e) => {
+      isDraggingMessage = true;
       const clientX = e.touches ? e.touches[0].clientX : e.clientX;
       const clientY = e.touches ? e.touches[0].clientY : e.clientY;
-      offsetX = clientX - card.offsetLeft;
-      offsetY = clientY - card.offsetTop;
-      card.style.cursor = 'grabbing';
-    };
+      offsetXMessage = clientX - MessageCard.offsetLeft;
+      offsetYMessage = clientY - MessageCard.offsetTop;
+      MessageCard.style.cursor = 'grabbing';
+    }
+    const stopDragMessage = () => {
+      isDraggingMessage = false;
+      MessageCard.style.cursor = 'grab';
+    }
 
-    const stopDrag = () => {
-      isDragging = false;
-      card.style.cursor = 'grab';
-    };
-
-    const onDrag = (e) => {
-      if (!isDragging) return;
+    const onDragMessage = (e) => {
+      if (!isDraggingMessage) return;
       const clientX = e.touches ? e.touches[0].clientX : e.clientX;
       const clientY = e.touches ? e.touches[0].clientY : e.clientY;
-      card.style.left = `${clientX - offsetX}px`;
-      card.style.top = `${clientY - offsetY}px`;
+      MessageCard.style.left = `${clientX - offsetXMessage}px`;
+      MessageCard.style.top = `${clientY - offsetYMessage}px`;
+    }
+
+    MessageCard.addEventListener('mousedown', startDragMessage);
+    document.addEventListener('mouseup', stopDragMessage);
+    document.addEventListener('mousemove', onDragMessage);
+    MessageCard.addEventListener('touchstart', startDragMessage, { passive: false });
+    document.addEventListener('touchend', stopDragMessage);
+    document.addEventListener('touchmove', onDragMessage, { passive: false });
+
+
+    const startDragMusic = (e) => {
+      isDraggingMusic = true;
+      const clientX = e.touches ? e.touches[0].clientX : e.clientX;
+      const clientY = e.touches ? e.touches[0].clientY : e.clientY;
+      offsetXMusic = clientX - MusicCard.offsetLeft;
+      offsetYMusic = clientY - MusicCard.offsetTop;
+      MusicCard.style.cursor = 'grabbing';
     };
 
-    card.addEventListener('mousedown', startDrag);
-    document.addEventListener('mouseup', stopDrag);
-    document.addEventListener('mousemove', onDrag);
+    const stopDragMusic = () => {
+      isDraggingMusic = false;
+      MusicCard.style.cursor = 'grab';
+    };
 
-    card.addEventListener('touchstart', startDrag, { passive: false });
-    document.addEventListener('touchend', stopDrag);
-    document.addEventListener('touchmove', onDrag, { passive: false });
+    const onDragMusic = (e) => {
+      if (!isDraggingMusic) return;
+      const clientX = e.touches ? e.touches[0].clientX : e.clientX;
+      const clientY = e.touches ? e.touches[0].clientY : e.clientY;
+      MusicCard.style.left = `${clientX - offsetXMusic}px`;
+      MusicCard.style.top = `${clientY - offsetYMusic}px`;
+    };
+
+    MusicCard.addEventListener('mousedown', startDragMusic);
+    document.addEventListener('mouseup', stopDragMusic);
+    document.addEventListener('mousemove', onDragMusic);
+
+    MusicCard.addEventListener('touchstart', startDragMusic, { passive: false });
+    document.addEventListener('touchend', stopDragMusic);
+    document.addEventListener('touchmove', onDragMusic, { passive: false });
 
     // Minimize + Restore
-    const restoreTab = document.getElementById('restoreTab');
+    const restoreTab = document.getElementById('showMusicCardBtn');
     function minimizeCard() {
-      card.style.left = '-200px';
+      MusicCard.style.left = '-200px';
       restoreTab.style.display = 'flex';
     }
 
     function restoreCard() {
-      card.style.left = '20px';
+      MusicCard.style.left = '20px';
       restoreTab.style.display = 'none';
     }
 
 
-    function minimizeCard() {
-  gsap.to(card, {
+function minimizeMusicCard() {
+  gsap.to(MusicCard, {
     opacity: 0,
     duration: 0.4,
     ease: 'power2.inOut',
     onComplete: () => {
-      card.style.display = 'none';
-      document.getElementById('showCardBtn').style.display = 'flex';
+      MusicCard.style.display = 'none';
+      document.getElementById('showMusicCardBtn').style.display = 'flex';
     }
   });
 }
 
-function showCard() {
-  card.style.display = 'block';
-  gsap.fromTo(card,
+function minimizeMsgCard() {
+  gsap.to(MessageCard, {
+    opacity: 0,
+    duration: 0.4,
+    ease: 'power2.inOut',
+    onComplete: () => {
+      MessageCard.style.display = 'none';
+      document.getElementById('showMsgBtn').style.display = 'flex';
+    }
+  });
+}
+
+function showMusicCard() {
+    MusicCard.style.display = 'block';
+  gsap.fromTo(MusicCard,
     { opacity: 0 },
     {
       opacity: 1,
@@ -348,7 +408,25 @@ function showCard() {
       ease: 'power2.inOut'
     }
   );
-  document.getElementById('showCardBtn').style.display = 'none';
+
+  document.getElementById('showMusicCardBtn').style.display = 'none';
+}
+
+function showMsgCard() {
+    MessageCard.style.display = 'flex';
+  gsap.fromTo(MessageCard,
+    { opacity: 0 },
+    {
+      opacity: 1,
+      duration: 0.4,
+      ease: 'power2.inOut'
+    }
+  );
+
+  animate(); // Start the progress circle animation
+   animateCount(); // Start the sunrise count animation
+
+  document.getElementById('showMsgBtn').style.display = 'none';
 }
 
  const countdownMusic = document.getElementById('countdownAudio');
@@ -459,3 +537,141 @@ function showCard() {
       };
       playlistUl.appendChild(li);
     });
+
+
+
+     // 🎂 set your birthday (month is 0-indexed, so 0 = January)
+  const birthMonth = 10; // Jan
+  const birthDay = 10;
+
+  function getPersonalYearProgress() {
+    const now = new Date();
+    const currentYear = now.getFullYear();
+
+    // determine last birthday and next birthday
+    let lastBirthday = new Date(currentYear, birthMonth, birthDay);
+    let nextBirthday = new Date(currentYear + 1, birthMonth, birthDay);
+
+    if (now < lastBirthday) {
+      // if birthday hasn’t come yet this year, go one year back
+      lastBirthday = new Date(currentYear - 1, birthMonth, birthDay);
+      nextBirthday = new Date(currentYear, birthMonth, birthDay);
+    }
+
+    const total = nextBirthday - lastBirthday;
+    const passed = now - lastBirthday;
+    return (passed / total) * 100;
+  }
+
+  const progressCircle = document.querySelector('.progress');
+  const text = document.querySelector('.text');
+  const totalLength = 2 * Math.PI * 60;
+  const targetPercent = getPersonalYearProgress();
+  let currentPercent = 0;
+
+  function animate() {
+    if (currentPercent < targetPercent) {
+      currentPercent += 0.5;
+      if (currentPercent > targetPercent) currentPercent = targetPercent;
+
+      const offset = totalLength - (totalLength * currentPercent) / 100;
+      progressCircle.style.strokeDashoffset = offset;
+      text.textContent = currentPercent.toFixed(1) + '%';
+      requestAnimationFrame(animate);
+    }
+  }
+
+  
+  // 💓 set your birth date and average heart rate
+  const birthDate = new Date("2007-01-15T00:00:00"); // change yours
+  const avgBPM = 72; // average beats per minute
+
+  const beatsEl = document.getElementById("beats");
+
+  function updateBeats() {
+    const now = new Date();
+    const diffMs = now - birthDate; // total milliseconds since birth
+    const totalMinutes = diffMs / (1000 * 60);
+    const totalBeats = totalMinutes * avgBPM;
+
+    beatsEl.textContent = Math.floor(totalBeats).toLocaleString();
+  }
+
+  // initial render
+  updateBeats();
+
+  // update every second to keep counting live
+  setInterval(updateBeats, 1000);
+  const now = new Date();
+  const diffTime = now - birthDate;
+  const daysAlive = Math.floor(diffTime / (1000 * 60 * 60 * 24));
+  const target = daysAlive;
+  let curren = 0;
+
+  function animateCount() {
+    if (curren < target) {
+      curren += Math.ceil((target - curren) / 25);
+      if (curren > target) current = target;
+      document.getElementById("sunrises").textContent = curren.toLocaleString();
+      requestAnimationFrame(animateCount);
+    }
+  }
+
+function updateBloodPumped() {
+
+  const litersPerBeat = 0.07 / 1000 * 1000; // 70 ml per beat (0.07 L)
+
+  
+  const bloodEl = document.getElementById("bloodLiters");
+    const now = new Date();
+    const diffMs = now - birthDate;
+    const totalMinutes = diffMs / (1000 * 60);
+    const totalLiters = totalMinutes * (avgBPM * litersPerBeat);
+    bloodEl.textContent = totalLiters.toLocaleString(undefined, {maximumFractionDigits: 0}) + " L";
+    
+  }
+
+  updateBloodPumped();
+  setInterval(updateBloodPumped, 1000);
+ 
+// Date-based text display
+
+  const today = new Date();
+    const day = today.getDate();
+    const month = today.getMonth() + 1; // months are 0-indexed
+
+    let textt = '';
+
+    // You can add whatever you want for each day
+    const messages = {
+  '6-11': 'Hello babes! Happy New Year!🎉 The most charming month of the year has finally arrived  hehehe.',
+  '2-1': 'Hello',
+  '3-1': 'How you doin?',
+};
+
+const key = `${day}-${month}`;
+textt = messages[key] || 'Just another day 😎';
+
+const dailyMsgs = document.getElementById('messages');
+
+dailyMsgs.textContent = textt;
+
+
+
+    dailyMsgs.addEventListener('mouseenter', () => {
+      dailyMsgs.style.opacity = '0';
+      setTimeout(() => {
+        dailyMsgs.textContent = 'Lovee youuu 💖';
+        dailyMsgs.style.opacity = '1';
+      }, 400); // same as transition duration
+    });
+
+    dailyMsgs.addEventListener('mouseleave', () => {
+      dailyMsgs.style.opacity = '0';
+      setTimeout(() => {
+        dailyMsgs.textContent = textt;
+      dailyMsgs.style.opacity = '1';
+      }, 400);
+    });
+
+    
